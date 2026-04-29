@@ -17,6 +17,13 @@ fn criterion_benchmark(c: &mut Criterion) {
             }, |mut v| bottom_up::merge_sort(black_box(&mut v), quicksort_like_merge),
             criterion::BatchSize::SmallInput));
 
+        group.bench_with_input(BenchmarkId::new("Top Down Quicksort-like", i), &vec.clone(), |b, v| b.iter_batched(|| {
+                let mut out = v.clone();
+                out.shuffle(&mut rng);
+                return out;
+            }, |mut v| top_down::merge_sort(black_box(&mut v), quicksort_like_merge),
+            criterion::BatchSize::SmallInput));
+    }
 }
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
