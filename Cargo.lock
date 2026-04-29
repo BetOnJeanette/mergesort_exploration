@@ -396,7 +396,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "powermerge"
+name = "power_merge"
 version = "0.1.0"
 dependencies = [
  "criterion",
