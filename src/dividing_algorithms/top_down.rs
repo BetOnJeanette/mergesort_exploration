@@ -1,4 +1,4 @@
-pub fn power_merge_top_down(list: &mut Vec<i32>) {
+pub fn merge_sort(list: &mut Vec<i32>) {
     let center = list.len() / 2;
     power_merge_top_down_helper(list, 0, center, list.len()); 
 }
