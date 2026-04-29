@@ -1,5 +1,5 @@
 use rand::prelude::*;
-use power_merge::powermerge;
+use power_merge::{dividing_algorithms::bottom_up, merging_algorithms::quicksort_like::quicksort_like_merge};
 
 fn main() {
     let mut rng = rand::rng();
@@ -10,7 +10,7 @@ fn main() {
         print!("{}, ", num.to_string());
     }
     println!("]");
-    powermerge::power_merge(&mut vec);
+    bottom_up::merge_sort(&mut vec,quicksort_like_merge);
     print!("after: [",);
     for num in vec.clone() {
         print!("{}, ", num.to_string());
