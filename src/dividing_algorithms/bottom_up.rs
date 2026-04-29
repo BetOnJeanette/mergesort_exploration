@@ -1,6 +1,6 @@
 use crate::merging_algorithms::Merger;
 
-fn merge_sort(list: &mut Vec<i32>, merge: Merger) {
+pub fn merge_sort(list: &mut Vec<i32>, merge: Merger) {
     let mut sub_size: usize = 1;
     while sub_size < list.len() {
         build_larger_sublists(list, sub_size, merge);
