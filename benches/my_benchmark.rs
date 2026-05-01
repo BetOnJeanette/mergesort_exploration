@@ -1,4 +1,5 @@
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
+use power_merge::merging_algorithms::traditional;
 use std::hint::black_box;
 use power_merge::dividing_algorithms::{top_down, bottom_up};
 use power_merge::merging_algorithms::quicksort_like::quicksort_like_merge;
@@ -22,6 +23,27 @@ fn criterion_benchmark(c: &mut Criterion) {
                 out.shuffle(&mut rng);
                 return out;
             }, |mut v| top_down::merge_sort(black_box(&mut v), quicksort_like_merge),
+            criterion::BatchSize::SmallInput));
+
+        group.bench_with_input(BenchmarkId::new("Bottom Up traditional", i), &vec.clone(), |b, v| b.iter_batched(|| {
+                let mut out = v.clone();
+                out.shuffle(&mut rng);
+                return out;
+            }, |mut v| bottom_up::merge_sort(black_box(&mut v), traditional::merge),
+            criterion::BatchSize::SmallInput));
+
+        group.bench_with_input(BenchmarkId::new("Top Down traditional", i), &vec.clone(), |b, v| b.iter_batched(|| {
+                let mut out = v.clone();
+                out.shuffle(&mut rng);
+                return out;
+            }, |mut v| top_down::merge_sort(black_box(&mut v), traditional::merge),
+            criterion::BatchSize::SmallInput));
+
+        group.bench_with_input(BenchmarkId::new("quicksort", i), &vec.clone(), |b, v| b.iter_batched(|| {
+                let mut out = v.clone();
+                out.shuffle(&mut rng);
+                return out;
+            }, |mut v| power_merge::quicksort(black_box(&mut v)),
             criterion::BatchSize::SmallInput));
     }
 }
