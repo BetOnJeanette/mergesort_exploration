@@ -1,19 +1,19 @@
 use rand::prelude::*;
-use power_merge::{dividing_algorithms::bottom_up, merging_algorithms::quicksort_like::quicksort_like_merge, quicksort};
+use power_merge::{dividing_algorithms::bottom_up, merging_algorithms::{quicksort_like::quicksort_like_merge, traditional}};
 
 fn main() {
     let mut rng = rand::rng();
-    let mut vec: Vec<i32> = (0..16).collect();
+    let mut vec: Vec<i32> = (0..2_i32.pow(5)).collect();
     vec.shuffle(&mut rng);
-    print!("before: [",);
-    for num in vec.clone() {
-        print!("{}, ", num.to_string());
+    print!("Before: [");
+    for item in vec.clone() {
+        print!("{}, ", item);
     }
     println!("]");
-    quicksort(&mut vec);
-    print!("after: [",);
-    for num in vec.clone() {
-        print!("{}, ", num.to_string());
+    bottom_up::merge_sort(&mut vec, quicksort_like_merge);
+    print!("after: [");
+    for item in vec.clone() {
+        print!("{}, ", item);
     }
     println!("]");
 }
