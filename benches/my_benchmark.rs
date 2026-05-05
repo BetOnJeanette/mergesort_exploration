@@ -3,6 +3,7 @@ use power_merge::merging_algorithms::traditional;
 use std::hint::black_box;
 use power_merge::dividing_algorithms::{top_down, bottom_up};
 use power_merge::merging_algorithms::quicksort_like::quicksort_like_merge;
+use power_merge::quicksort;
 use rand::prelude::*;
 
 fn criterion_benchmark(c: &mut Criterion) {
@@ -43,7 +44,7 @@ fn criterion_benchmark(c: &mut Criterion) {
                 let mut out = v.clone();
                 out.shuffle(&mut rng);
                 return out;
-            }, |mut v| power_merge::quicksort(black_box(&mut v)),
+            }, |mut v| quicksort(black_box(&mut v)),
             criterion::BatchSize::SmallInput));
     }
 }

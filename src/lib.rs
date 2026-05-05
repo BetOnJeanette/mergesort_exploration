@@ -11,13 +11,12 @@ fn quicksort_helper(list: &mut Vec<i32>, start: usize, end: usize){
     let mut right = end - 1;
     let pivot = list[start];
     while left < right{
-        while left < end && list[left] < pivot  { left += 1; }
-        while right > start && list[right] > pivot { right -= 1; }
-        if left < right { swap(list, left, right); }
+        if list[left] > pivot && list[right] < pivot { swap(list, left, right); }
+        if list[left] < pivot { left += 1; }
+        if list[right] > pivot { right -= 1; }
     }
-    if right > start && list[right] < pivot {
-        swap(list, start, right);
-    }
+    while right > start && list[right] > pivot { right -= 1; }
+    swap(list, start, right);
     quicksort_helper(list, start, right);
     quicksort_helper(list, right + 1, end);
 }
